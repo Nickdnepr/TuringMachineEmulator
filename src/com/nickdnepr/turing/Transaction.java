@@ -35,4 +35,15 @@ public class Transaction {
     public MovementDirection getDirectionToMove() {
         return directionToMove;
     }
+
+    @Override
+    public String toString() {
+        return "Transaction{" +
+                "sourceStateName='" + sourceStateName + '\'' +
+                ", transactionStateName='" + transactionStateName + '\'' +
+                ", letterToRead=" + letterToRead +
+                ", letterToWrite=" + letterToWrite +
+                ", directionToMove=" + directionToMove +
+                '}';
+    }
 }

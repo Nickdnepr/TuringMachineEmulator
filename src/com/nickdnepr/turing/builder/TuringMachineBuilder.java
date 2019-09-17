@@ -10,13 +10,16 @@ import java.util.LinkedHashMap;
 
 public class TuringMachineBuilder {
 
+    public static final String FINAL_STATE_NAME = "end";
+
     private String startupStateName;
     private ArrayList<String> states;
     private LinkedHashMap<String, LinkedHashMap<Character, Transaction>> transactions;
 
     public TuringMachineBuilder() {
         this.states = new ArrayList<>();
-        this.states.add("end");
+        this.transactions = new LinkedHashMap<>();
+        this.states.add(FINAL_STATE_NAME);
     }
 
     public TuringMachineBuilder(String startupStateName) {
@@ -32,6 +35,7 @@ public class TuringMachineBuilder {
             if (startupStateName == null) {
                 startupStateName = stateName;
             }
+            transactions.put(stateName, new LinkedHashMap<>());
         }
     }
 
@@ -74,14 +78,30 @@ public class TuringMachineBuilder {
 
 
     //TODO complete builder
-//    public TuringMachine build(String machineName, String inputString){
-//
-//        TuringMachine machine = new TuringMachine(machineName, inputString);
-//    }
-//
-//    private State buildState(String stateName){
-//
-//    }
+    public TuringMachine build(String machineName, String inputString) {
+        LinkedHashMap<String, State> states = new LinkedHashMap<>();
+        State startupState =  buildState(startupStateName);
+        states.put(startupStateName, startupState);
+        while (!this.states.isEmpty()) {
+            states.put(this.states.get(0), buildState(this.states.get(0)));
+        }
+        TuringMachine machine = new TuringMachine(machineName, new StringBuilder(inputString),startupState, states);
+        return machine;
+    }
 
+    private State buildState(String stateName) {
+        State state = new State(stateName, transactions.get(stateName), stateName.equals("end"));
+        transactions.remove(stateName);
+        states.remove(stateName);
+        return state;
+    }
 
+    @Override
+    public String toString() {
+        return "TuringMachineBuilder{" +
+                "startupStateName='" + startupStateName + '\'' +
+                ", states=" + states +
+                ", transactions=" + transactions +
+                '}';
+    }
 }

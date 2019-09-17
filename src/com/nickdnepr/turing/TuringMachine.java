@@ -30,6 +30,11 @@ public class TuringMachine {
             return;
         }
         Transaction transaction = currentState.getTransaction(inputString.charAt(readerHeadPosition));
+        if (transaction==null){
+            result = MachineResult.FALSE;
+            step();
+            return;
+        }
         inputString.setCharAt(readerHeadPosition, transaction.getLetterToWrite());
         State newState = states.get(transaction.getTransactionStateName());
         if (newState == null) {
@@ -52,7 +57,7 @@ public class TuringMachine {
     }
 
     public void run() {
-        while (result==MachineResult.UNDEFINED){
+        while (result == MachineResult.UNDEFINED) {
             step();
         }
     }
@@ -82,5 +87,18 @@ public class TuringMachine {
 
     public int getReaderHeadPosition() {
         return readerHeadPosition - readerHeadPositionOffset;
+    }
+
+    @Override
+    public String toString() {
+        return "TuringMachine{" +
+                "name='" + name + '\'' +
+                ", inputString=" + inputString +
+                ", readerHeadPosition=" + readerHeadPosition +
+                ", readerHeadPositionOffset=" + readerHeadPositionOffset +
+                ", currentState=" + currentState +
+                ", states=" + states +
+                ", result=" + result +
+                '}';
     }
 }
