@@ -77,7 +77,6 @@ public class TuringMachineBuilder {
     }
 
 
-    //TODO complete builder
     public TuringMachine build(String machineName, String inputString) {
         LinkedHashMap<String, State> states = new LinkedHashMap<>();
         State startupState =  buildState(startupStateName);
@@ -94,6 +93,10 @@ public class TuringMachineBuilder {
         transactions.remove(stateName);
         states.remove(stateName);
         return state;
+    }
+
+    public ArrayList<String> getStates() {
+        return states;
     }
 
     @Override
