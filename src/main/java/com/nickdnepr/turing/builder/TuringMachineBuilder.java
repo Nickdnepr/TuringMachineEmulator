@@ -20,6 +20,7 @@ public class TuringMachineBuilder {
         this.states = new ArrayList<>();
         this.transactions = new LinkedHashMap<>();
         this.states.add(FINAL_STATE_NAME);
+        transactions.put(FINAL_STATE_NAME, new LinkedHashMap<>());
     }
 
     public TuringMachineBuilder(String startupStateName) {

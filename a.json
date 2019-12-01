@@ -1,0 +1,1 @@
+{"name":"a","inputString":"a","readerHeadPosition":0,"readerHeadPositionOffset":0,"currentState":{"name":"1","transactions":{},"isFinal":false},"states":{"1":{"name":"1","transactions":{},"isFinal":false},"end":{"name":"end","transactions":{},"isFinal":true}},"result":"UNDEFINED","visitedStates":{"1":[{"key":"a","value":0}],"end":[]}}
